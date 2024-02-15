@@ -57,7 +57,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         if self.pic:
             return 'http://127.0.0.1:8000' + self.pic.url
         else:
-            return 'https://picsum.photos/200/200'
+            return 'https://i.pravatar.cc/40?img=70'
 
 
 class FriendshipRequest(models.Model):

@@ -35,7 +35,7 @@
                     </template>
 
                     <div>
-                        <button class="py-4 px-6 bg-purple-600 text-white rounded-lg">Log in</button>
+                        <button class="py-4 px-6 bg-yellow-700 text-white rounded-lg">Log in</button>
                     </div>
                 </form>
             </div>

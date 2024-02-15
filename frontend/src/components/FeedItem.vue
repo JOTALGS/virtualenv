@@ -1,7 +1,7 @@
 <template>
     <div class="mb-6 flex items-center justify-between">
         <div class="flex items-center space-x-6">
-            <img :src="post.owner.get_image" class="w-[40px] rounded-full">
+            <img :src="post.owner.get_pic" class="w-[40px] rounded-full">
             
             <p>
                 <strong>

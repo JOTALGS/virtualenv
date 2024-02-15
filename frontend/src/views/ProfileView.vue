@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
         <div class="main-left col-span-1">
             <div class="p-4 bg-white border border-gray-200 text-center rounded-lg">
-                <img :src="user.get_pic" class="mb-6 rounded-full">
+                <img :src="user.get_image" class="mb-6 rounded-full">
                 
                 <p><strong>{{ user.name }}</strong></p>
 
@@ -48,29 +48,6 @@
         </div>
 
         <div class="main-center col-span-2 space-y-4">
-            <div 
-                class="bg-white border border-gray-200 rounded-lg"
-                v-if="userStore.user.id === user.id"
-            >
-                <form v-on:submit.prevent="submitForm" method="post">
-                    <div class="p-4">  
-                        <textarea v-model="body" class="p-4 w-full bg-gray-100 rounded-lg" placeholder="What are you thinking about?"></textarea>
-
-                        <div id="preview" v-if="url">
-                            <img :src="url" class="w-[100px] mt-3 rounded-xl" />
-                        </div>
-                    </div>
-
-                    <div class="p-4 border-t border-gray-100 flex justify-between">
-                        <label class="inline-block py-4 px-6 bg-gray-600 text-white rounded-lg">
-                            <input type="file" ref="file" @change="onFileChange">
-                            Attach image
-                        </label>
-
-                        <button class="inline-block py-4 px-6 bg-purple-600 text-white rounded-lg">Post</button>
-                    </div>
-                </form>
-            </div>
 
             <div 
                 class="p-4 bg-white border border-gray-200 rounded-lg"
@@ -137,7 +114,6 @@ export default {
                 id: null
             },
             body: '',
-            url: null,
         }
     },
 
@@ -156,11 +132,6 @@ export default {
     },
 
     methods: {
-        onFileChange(e) {
-            const file = e.target.files[0];
-            this.url = URL.createObjectURL(file);
-            console.log('file and url', file, this.url)
-        },
 
         sendFriendshipRequest() {
             axios

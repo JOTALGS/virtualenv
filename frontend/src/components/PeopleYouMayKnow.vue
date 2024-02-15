@@ -10,7 +10,7 @@
                     <p class="text-xs"><strong>Code With Stein</strong></p>
                 </div>
 
-                <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Show</a>
+                <a href="#" class="py-2 px-3 bg-cyan-600 text-white text-xs rounded-lg">Show</a>
             </div>
 
             <div class="flex items-center justify-between">
@@ -20,7 +20,7 @@
                     <p class="text-xs"><strong>Code With Stein</strong></p>
                 </div>
 
-                <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Show</a>
+                <a href="#" class="py-2 px-3 bg-cyan-600 text-white text-xs rounded-lg">Show</a>
             </div>
 
             <div class="flex items-center justify-between">
@@ -30,7 +30,7 @@
                     <p class="text-xs"><strong>Code With Stein</strong></p>
                 </div>
 
-                <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Show</a>
+                <a href="#" class="py-2 px-3 bg-cyan-600 text-white text-xs rounded-lg">Show</a>
             </div>
         </div>
     </div>
