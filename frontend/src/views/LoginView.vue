@@ -1,30 +1,18 @@
 <template>
-    <div class="max-w-7xl mx-auto grid grid-cols-2 gap-4">
+    <div class="mx-auto grid grid-cols-2 gap-4 mb-16 background-image border rounded-lg">
         <div class="main-left">
-            <div class="p-12 bg-white border border-gray-200 rounded-lg">
-                <h1 class="mb-6 text-2xl">Log in</h1>
-
-                <p class="mb-6 text-gray-500">
-                    Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate.
-                    Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate.
-                </p>
-
-                <p class="font-bold">
-                    Don't have an account? <RouterLink :to="{'name': 'signup'}" class="underline">Click here</RouterLink> to create one!
-                </p>
-            </div>
         </div>
 
-        <div class="main-right">
-            <div class="p-12 bg-white border border-gray-200 rounded-lg">
+        <div class="main-right mt-8 mr-10">
+            <div class="p-12 bg-white border border-gray-200 rounded-lg bg-gray-500 bg-opacity-50">
                 <form class="space-y-6" v-on:submit.prevent="submitForm">
                     <div>
-                        <label>E-mail</label><br>
+                        <label class="text-gray-100">E-mail</label><br>
                         <input type="email" v-model="form.email" placeholder="Your e-mail address" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
                     </div>
 
                     <div>
-                        <label>Password</label><br>
+                        <label class="text-gray-100">Password</label><br>
                         <input type="password" v-model="form.password" placeholder="Your password" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
                     </div>
 
@@ -35,11 +23,23 @@
                     </template>
 
                     <div>
-                        <button class="py-4 px-6 bg-yellow-700 text-white rounded-lg">Log in</button>
+                        <button class="py-4 px-6 bg-purple-600 text-white rounded-lg">Log in</button>
                     </div>
                 </form>
             </div>
         </div>
+    </div>
+    <div class=" p-12 bg-white border border-gray-200 rounded-lg">
+        <h1 class="mb-6 text-2xl">Log in</h1>
+
+        <p class="mb-6 text-gray-500">
+            Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate.
+            Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate.
+        </p>
+
+        <p class="font-bold">
+            Don't have an account? <RouterLink :to="{'name': 'signup'}" class="underline">Click here</RouterLink> to create one!
+        </p>
     </div>
 </template>
 
@@ -84,14 +84,16 @@ export default {
                     .then(response => {
                         this.userStore.setToken(response.data)
 
-                        console.log('response.access: ', response.data.access)
-
                         axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.access;
                     })
                     .catch(error => {
-                        console.log('error login api', error)
+                        console.log('error', error)
+
+                        this.errors.push('The email or password is incorrect! Or the user is not activated!')
                     })
-                
+            }
+            
+            if (this.errors.length === 0) {
                 await axios
                     .get('/api/me/')
                     .then(response => {
@@ -107,3 +109,15 @@ export default {
     }
 }
 </script>
+
+<style>
+.background-image {
+  /* Set the background image */
+  background-image: url('../assets/pityok.jpg');
+  /* Set background size, position, and repeat properties as needed */
+  background-size: cover;
+  /* Set the height to ensure the background image covers the container */
+  height: 60vh; /* Example: full viewport height */
+  overflow: visible; /* Allows content to overflow the div */
+}
+</style>

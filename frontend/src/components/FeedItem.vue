@@ -13,12 +13,15 @@
         <p class="text-gray-600">{{ post.created_since }} ago</p>
     </div>
 
-    <p>{{ post.attachments.length }}</p>
     <template v-if="post.attachments.length">
-        <img v-for="image in post.attachments" v-bind:key="image.id" :src="image.get_image" class="w-full mb-4 rounded-xl">
+        <img v-for="image in post.attachments"
+            v-bind:key="image.id"
+            :src="image.get_image"
+            class="w-full mb-4 rounded-xl"
+        >
     </template>
 
-    <p>{{ post.body }}</p>
+    <RouterLink :to="{name: 'postview', params: {id: post.id}}" class="text-black-500"><p>{{ post.body }}</p></RouterLink>
 
     <div class="my-6 flex justify-between">
         <div class="flex space-x-6">
@@ -55,6 +58,7 @@ export default {
     props: {
         post: Object
     },
+
     methods: {
         likePost(id) {
             axios

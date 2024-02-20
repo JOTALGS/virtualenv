@@ -1,10 +1,10 @@
 <template>
     <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
         <div class="main-center col-span-3 space-y-4">
-            <div class="bg-white border border-gray-200 rounded-lg">
+            <div class="bg-white border border-gray-400 rounded-lg">
                 <form v-on:submit.prevent="submitForm" method="post">
                     <div class="p-4">  
-                        <textarea v-model="body" class="p-4 w-full bg-gray-100 rounded-lg" placeholder="What are you thinking about?"></textarea>
+                        <textarea v-model="body" class="p-4 w-full bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100" placeholder="What are you thinking about?"></textarea>
                     </div>
 
                     <div class="p-4 border-t border-gray-100 flex justify-end space-x-1">
@@ -15,13 +15,13 @@
                             </svg>
                         </label>
   
-                        <button class="inline-block py-4 px-6 bg-cyan-700 text-white rounded-lg">Post</button>
+                        <button class="inline-block py-4 px-6 bg-cyan-700 text-white rounded-lg" onclick="window.location.reload()">Post</button>
                     </div>
                 </form>
             </div>
 
             <div 
-                class="p-4 bg-white border border-gray-200 rounded-lg"
+                class="p-4 bg-white hover:bg-blue-100 border border-gray-400 rounded-lg"
                 v-for="post in posts"
                 v-bind:key="post.id"
             >

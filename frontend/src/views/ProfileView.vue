@@ -157,7 +157,7 @@ export default {
                     console.log('data', response.data)
 
                     this.posts = response.data.posts
-                    console.log('data posts', response.data.posts)
+                    console.log('data posts', response.data.user)
 
                     this.user = response.data.user
                 })

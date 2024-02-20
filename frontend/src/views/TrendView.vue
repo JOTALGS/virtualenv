@@ -46,7 +46,7 @@ export default {
     },
 
     mounted() {
-        this.getFeed()
+        //this.getFeed()
     },
 
     watch: { 
@@ -64,9 +64,16 @@ export default {
             axios
                 .get(`/api/posts/?trend=${this.$route.params.id}`)
                 .then(response => {
-                    console.log('data', response.data)
+                    console.log('data tre', response.data)
 
-                    this.posts = response.data
+                    for (let post of response.data) {
+                    // Do something with each post
+
+                    if (post.body === `#${this.$route.params.id}`) {
+                            console.log(post.body)
+                            this.posts.push(post)
+                        }
+                    }
                 })
                 .catch(error => {
                     console.log('error', error)
