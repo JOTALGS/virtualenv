@@ -7,6 +7,7 @@ from .forms import SignupForm, ProfileForm
 from .models import User, FriendshipRequest
 from .serializers import UserSerializer, FriendshipRequestSerializer
 
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 @api_view(['GET'])
 def me(request):
@@ -34,18 +35,10 @@ def signup(request):
 
     if form.is_valid():
         user = form.save()
-        user.is_active = False
+        user.is_active = True
         user.save()
 
-        url = f'http://127.0.0.1:8000/activateemail/?email={user.email}&id={user.id}'
 
-        send_mail(
-            "Please verify your email",
-            f"The url for activating your account is: {url}",
-            "noreply@wey.com",
-            [user.email],
-            fail_silently=False,
-        )
     else:
         message = form.errors.as_json()
     
@@ -135,3 +128,15 @@ def handle_request(request, pk, status):
     request_user.save()
 
     return JsonResponse({'message': 'friendship request updated'})
+
+@api_view(['GET'])
+def suggest_users(request):
+
+    users_to_suggest = User.objects.all()
+    print('user suggest', users_to_suggest)
+    users_serializer = UserSerializer(users_to_suggest, many=True)
+
+
+    return JsonResponse({
+        'suggestions': users_serializer.data,
+    }, safe=False)

@@ -114,7 +114,22 @@ def post_create_comment(request, pk):
 
 
 @api_view(['GET'])
-def get_trends(request):
-    serializer = TrendSerializer(Trend.objects.all(), many=True)
+def get_top_trends(request):
+    trends = Trend.get_top_today()
+    top_trends = trends
+
+    serializer = TrendSerializer(top_trends, many=True)
 
     return JsonResponse(serializer.data, safe=False)
+
+@api_view(['GET'])
+def get_search_trends(request, input):
+
+    input = input.strip()
+    trends_search = Trend.objects.filter(hashtag__istartswith=input)
+    trend_serializer = TrendSerializer(trends_search, many=True)
+
+
+    return JsonResponse({
+        'trends_found': trend_serializer.data,
+    }, safe=False)

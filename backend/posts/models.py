@@ -2,6 +2,7 @@ from django.db import models
 import uuid
 from accounts.models import User
 from django.utils.timesince import timesince
+from django.utils import timezone
 
 # Create your models here.
 
@@ -41,7 +42,7 @@ class Posts(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     body = models.TextField(blank=True, null=True)
     attachments = models.ManyToManyField(PostAttachment, blank=True)
-    created_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
 
     likes = models.ManyToManyField(Like, blank=True)
@@ -58,4 +59,15 @@ class Posts(models.Model):
 
 class Trend(models.Model):
     hashtag = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now=True)
     occurences = models.IntegerField()
+
+    @classmethod
+    def get_top_today(cls):
+        # Get the current date
+        today = timezone.now().date()
+
+        # Filter trends created today and order by occurrences (descending)
+        top_trends = cls.objects.filter(created_at__date=today).order_by('-occurences')
+
+        return top_trends
